@@ -1,15 +1,15 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('testSequelize', 'root', '', {
+const sequelize = new Sequelize('Raudi', 'root', '', {
     host: 'localhost',
     dialect: 'mariadb'
 })
 
-// tester la connexion
-sequelize.authenticate().then(()=>{
-    console.log('authentification réussit')
-}).catch((err)=>{
-    console.log(err);
-})
+// Test connection
+sequelize.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+}).catch(err => {
+    console.error('Unable to connect to the database:', err);
+});
 
-module.exports = sequelize
+module.exports = sequelize;
