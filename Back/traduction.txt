@@ -1,0 +1,18 @@
+*******TABLE CAR*******
+name = nom => nom du modèle de voiture
+door = porte => nombre de portes de la voiture
+engine = moteur => type de moteur de la voiture 
+                    -> fuel 
+                    -> diesel 
+seating_capacity = nombre de places assises 
+
+*******TABLE OPTION*******
+ac (Air Conditionning) = clim 
+transmission = transmission => type de boîte de transmission de la voiture 
+                    -> automatic 
+                    -> manual 
+roof = toît => type de toît de la voiture 
+                    -> fixed_roof 
+                    -> sun_roof 
+automatic_parking = stationnement automatique 
+rearview_camera = camera de recul 

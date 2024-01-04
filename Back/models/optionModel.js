@@ -3,8 +3,8 @@ const {DataTypes} = require('sequelize')
 //ici importation des modeles avec lesquels lier cette table
 
 
-//table Car et champs
-const Car = sequelize.define('car', {
+//table Option et champs
+const Option = sequelize.define('option', {
     //première colonne
     id: {
         type: DataTypes.INTEGER,
@@ -13,24 +13,28 @@ const Car = sequelize.define('car', {
         autoincrement: true
     },
     //deuxième colonne
-    name: {
-        type: DataTypes.STRING,
-        unique: true,
+    ac: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     },
     //troisième colonne
-    door: {
-        type: DataTypes.INTEGER,
+    transmission: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     //quatrième colonne
-    engine: {
+    roof: {
         type: DataTypes.STRING,
         allowNull: false,
     },
      //cinqième colonne
-     seating_capacity: {
-        type: DataTypes.INTEGER,
+     automatic_parking: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
+     //sixème colonne
+     rearview_camera: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     }
 });
@@ -39,4 +43,4 @@ const Car = sequelize.define('car', {
 //ici faire les liens has et belongsTo etc 
 
 
-module.exports = Car
+module.exports = Option
