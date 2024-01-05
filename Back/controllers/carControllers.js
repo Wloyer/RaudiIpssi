@@ -16,10 +16,6 @@ exports.createCar = async(req,res)=>{
 
 exports.updateCar = async(req,res)=>{
     let idC = req.params.id
-    let nameC = req.params.name
-    let doorC = req.params.door
-    let engineC = req.params.engine
-    let seating_capacityC = req.params.seating_capacity
     let UpdateDataCar = req.body
 
     let car = await Car.update(UpdateDataCar,{

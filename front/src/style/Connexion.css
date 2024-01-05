@@ -39,6 +39,11 @@
     padding: 10px;
     margin-bottom: 16px;
   }
+
+  .inputConn[type="text"], .inputConn[type="email"], .inputConn[type="password"] {
+    border-radius: 5px;
+    border: 0.3px solid black;
+  }
   
   .remember-me {
     display: flex;

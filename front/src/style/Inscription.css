@@ -24,6 +24,11 @@
     margin-bottom: 16px;
   }
 
+  .inputInsc[type="text"], .inputInsc[type="email"], .inputInsc[type="password"] {
+    border-radius: 5px;
+    border: 0.3px solid black;
+  }
+
   .h2Insc {
     font-size: 24px;
     color: #333;
