@@ -9,7 +9,7 @@ const Car = sequelize.define("car", {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
-    autoincrement: true,
+    autoIncrement: true,
   },
   //deuxième colonne
   name: {

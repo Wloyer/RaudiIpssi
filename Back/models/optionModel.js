@@ -10,7 +10,7 @@ const Option = sequelize.define('option', {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     //deuxième colonne
     ac: {
