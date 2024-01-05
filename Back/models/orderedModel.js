@@ -1,51 +1,25 @@
-const sequelize = require('../database/database')
-const {DataTypes} = require('sequelize')
-//ici importation des modeles avec lesquels lier cette table
+const sequelize = require("../database/database");
+const { DataTypes } = require("sequelize");
 
-
-//table Option et champs
-const Option = sequelize.define('option', {
-    //première colonne
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoincrement: true
-    },
-    //deuxième colonne
-    ac: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    },
-    //troisième colonne
-    transmission: {
-        type: DataTypes.STRING,
+const Order = sequelize.define("Order", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  price: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+    orderDate: {
+        type: DataTypes.DATE,
         allowNull: false,
     },
-    //quatrième colonne
-    roof: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-     //cinqième colonne
-     automatic_parking: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    },
-     //sixème colonne
-     rearview_camera: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    }
 });
 
+Order.associate = (models) => {
+  Order.ManyToMany(models.User, { as: "User", foreignKey: "userId" });
+  Order.ManyToMany(models.Car, { as: "Car", foreignKey: "carId" });
+};
 
-// Option.associate = (models) => {
-//     Option.belongsToMany(models.Car, { 
-//         through: 'CarOptions', 
-//         as: 'Cars', 
-//         foreignKey: 'optionId' 
-//     });
-// };
-
-module.exports = Option
+module.exports = Order;
