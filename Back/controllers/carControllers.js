@@ -25,10 +25,6 @@ exports.updateCar = async(req,res)=>{
     let car = await Car.update(UpdateDataCar,{
         where: {
             id: idC,
-            name: nameC,
-            door: doorC,
-            engine: engineC,
-            seating_capacity: seating_capacityC
         }
     })
     res.status(200).json(car)
