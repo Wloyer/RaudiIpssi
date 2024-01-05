@@ -4,6 +4,7 @@ const optionController = require('../controllers/optionControllers')
 
 route.get('/getAllOption', optionController.getAllOption)
 route.post('/createOption', optionController.CreateOption)
-route.put('/updateOption', optionController.UpdateOption)
-route.delete('deleteOption', optionController.DeleteOption)
+route.put('/updateOption/:id', optionController.UpdateOption)
+route.delete('/deleteOption/:id', optionController.DeleteOption)
+
 module.exports = route;
