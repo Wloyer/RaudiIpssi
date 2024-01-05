@@ -5,6 +5,7 @@ const sequelize = new Sequelize(process.env.DB_DTB, process.env.DB_USER, process
     host: process.env.DB_HOST,
     dialect: 'mariadb',
     logging: console.log,
+    port: process.env.DB_PORT,
 })
 
 // Test connection
