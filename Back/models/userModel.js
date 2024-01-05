@@ -47,6 +47,7 @@ const User = sequelize.define('user', {
     }
 });
 
+
 return User;
 
 

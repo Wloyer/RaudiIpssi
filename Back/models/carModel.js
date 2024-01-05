@@ -34,9 +34,17 @@ const Car = sequelize.define('car', {
         allowNull: false,
     }
 });
+// Car.associate = (models) => {
+//     Car.belongsTo(models.User, { as: 'Owner', foreignKey: 'userId' });
+//     Car.belongsToMany(models.Option, { 
+//         through: 'CarOptions', 
+//         as: 'Options', 
+//         foreignKey: 'carId' 
+//     });
+// };
 
 
-//ici faire les liens has et belongsTo etc 
+
 
 
 module.exports = Car
