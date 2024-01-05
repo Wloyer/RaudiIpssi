@@ -45,6 +45,7 @@ Car.associate = (models) => {
     as: "Cars",
     foreignKey: "optionId",
   });
+  Car.hasMany(models.Order, { as: "Orders", foreignKey: "carId" });
 };
 
 module.exports = Car;

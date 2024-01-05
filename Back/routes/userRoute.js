@@ -6,3 +6,4 @@ route.get('getAllUser', userController.getUser)
 route.post('createUser', userController.createUser)
 route.put('updateUser', userController.updateUser)
 route.delete('deleteUser', userController.deleteUser)
+module.exports = route;

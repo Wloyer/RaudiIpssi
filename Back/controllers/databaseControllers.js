@@ -2,6 +2,7 @@ const sequelize = require('../database/database')
 const Car = require('../models/carModel')
 const User = require('../models/userModel')
 const Option = require('../models/optionModel')
+const Ordered = require('../models/orderedModel')
 
 exports.createAllTable = async (req, res) => {
     try {

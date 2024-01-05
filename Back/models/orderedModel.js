@@ -11,15 +11,23 @@ const Order = sequelize.define("Order", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-    orderDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
+  orderDate: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  carId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
 Order.associate = (models) => {
-  Order.ManyToMany(models.User, { as: "User", foreignKey: "userId" });
-  Order.ManyToMany(models.Car, { as: "Car", foreignKey: "carId" });
+  Order.belongsTo(models.User, { as: "User", foreignKey: "userId" });
+  Order.belongsTo(models.Car, { as: "Car", foreignKey: "carId" });
 };
 
 module.exports = Order;

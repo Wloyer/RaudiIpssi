@@ -6,3 +6,4 @@ route.get('/getAllOption', optionController.getAllOption)
 route.post('/createOption', optionController.CreateOption)
 route.put('/updateOption', optionController.UpdateOption)
 route.delete('deleteOption', optionController.DeleteOption)
+module.exports = route;
