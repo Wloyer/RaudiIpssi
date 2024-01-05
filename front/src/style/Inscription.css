@@ -1,0 +1,56 @@
+/* Inscription.css */
+
+.inscription-container {
+    max-width: 500px;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #8e8e8e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(227, 227, 227, 0.8);
+}
+  
+  .inscription-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .labelInsc {
+    margin-bottom: 8px;
+  }
+  
+  .inputInsc {
+    padding: 10px;
+    margin-bottom: 16px;
+  }
+
+  .h2Insc {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Pour mettre le texte en majuscules */
+  }
+
+  .goToConnexion{
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #45a049;
+    margin-left: 20%;
+    font-weight: 500;
+  }
+  
+  .buttonInsc {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .buttonInsc:hover {
+    background-color: #45a049;
+  }
+  
