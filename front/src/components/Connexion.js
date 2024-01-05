@@ -5,20 +5,21 @@ import '../style/Connexion.css';
 function Connexion() {
   return (
     <div className="connexion-container">
-      <h2>Connexion</h2>
+      <h2 className='h2Conn'>Connexion</h2>
       <form className="connexion-form">
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+        <label className='labelConn' htmlFor="email">Email:</label>
+        <input className='inputConn' type="email" id="email" name="email" required />
 
-        <label htmlFor="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required />
+        <label className='labelConn' htmlFor="password">Mot de passe:</label>
+        <input className='inputConn' type="password" id="password" name="password" required />
 
         <div className="remember-me">
-          <input type="checkbox" id="remember" name="remember" />
-          <label htmlFor="remember">Se souvenir de moi</label>
+          <input className='inputConn' type="checkbox" id="remember" name="remember" />
+          <label className='labelConn' htmlFor="remember">Se souvenir de moi</label>
+          <a className='senregistrer' href="/inscription">Je n'ai pas de compte ?</a>
         </div>
 
-        <button type="submit">Se connecter</button>
+        <button className='buttonConn' type="submit">Se connecter</button>
       </form>
     </div>
   );
