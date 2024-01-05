@@ -32,6 +32,10 @@ const Car = sequelize.define("car", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  photoUrl: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  }
 });
 Car.associate = (models) => {
   Car.belongsTo(models.User, { as: "Owner", foreignKey: "userId" });
