@@ -3,8 +3,6 @@ const Car = require('../models/carModel')
 const User = require('../models/userModel')
 const Option = require('../models/optionModel')
 
-
-
 exports.createAllTable = async (req, res) => {
     try {
         await sequelize.sync({ force: true });
