@@ -40,7 +40,12 @@ const Option = sequelize.define('option', {
 });
 
 
-//ici faire les liens has et belongsTo etc 
-
+// Option.associate = (models) => {
+//     Option.belongsToMany(models.Car, { 
+//         through: 'CarOptions', 
+//         as: 'Cars', 
+//         foreignKey: 'optionId' 
+//     });
+// };
 
 module.exports = Option
