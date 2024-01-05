@@ -8,13 +8,13 @@ exports.getAllCar = async(req,res) => {
     })
 };
 
-exports.CreateCar = async(req,res)=>{
+exports.createCar = async(req,res)=>{
     let car = req.body 
     await Car.create(car)
     res.status(201).json("voiture créée")
 };
 
-exports.UpdateCar = async(req,res)=>{
+exports.updateCar = async(req,res)=>{
     let idC = req.params.id
     let nameC = req.params.name
     let doorC = req.params.door
@@ -34,7 +34,7 @@ exports.UpdateCar = async(req,res)=>{
     res.status(200).json(car)
 };
 
-exports.DeleteCar = async(req,res) => {
+exports.deleteCar = async(req,res) => {
     let idC = req.params.id
     
     let deleteCar = await Car.destroy({
