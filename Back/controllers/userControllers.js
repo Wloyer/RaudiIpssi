@@ -35,7 +35,16 @@ const UserController = {
             res.status(400).json({ error: error.message });
         }
     },
-
+    
+    // Lire les informations de tous les utilisateurs
+    async getAllUsers(req, res) {
+        try {
+            const users = await User.findAll();
+            res.status(200).json(users);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    },
     // Mettre à jour un utilisateur
     async updateUser(req, res) {
         try {
