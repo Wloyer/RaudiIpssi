@@ -7,14 +7,14 @@ import Accueil from './Accueil';
 import Historique from './Historique';
 import Customisation from './Customisation';
 import Admin from './Admin';
+import Details from './Details';
 import Connexion from './Connexion';
 import Inscription from './Inscription';
 
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
+      <div className='contenu'>
         <nav>
           <ul className="nav-left">
             <li><Link to="/">Accueil</Link></li>
@@ -27,16 +27,31 @@ function App() {
             <li><Link to="/inscription">Inscription</Link></li>
           </ul>
         </nav>
-        </nav>
-
-        <Routes>
-          <Route path="/" component={Accueil} />
-          <Route path="/historique" component={Historique} />
-          <Route path="/customisation" component={Customisation} />
-          <Route path="/admin" component={Admin} />
-          <Route path="/connexion" component={Connexion} />
-          <Route path="/inscription" component={Inscription} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<Accueil />} />
+            <Route path="/historique" element={<Historique />} />
+            <Route path="/customisation" element={<Customisation />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/connexion" element={<Connexion />} />
+            <Route path="/inscription" element={<Inscription />} />
+            <Route path="/details/:ref" element={<Details />} />
+          </Routes>
+        </main>
+        <footer>
+          <div className='footer'>
+            <ul className="footer-left">
+              <li><a href='https://youtube.com' target='_blank'>Mentions légales</a></li>
+              <li><a href='https://youtube.com' target='_blank'>Paramètres des cookies</a></li>
+              <li><a href='https://youtube.com' target='_blank'>CGU</a></li>
+            </ul>
+            <ul className="footer-right">
+              <li>Numéro de téléphone : 01.69.69.25.52</li>
+              <li>Adresse postale : 123 Rue de l'Exemple, Paris</li>
+              <li>Adresse e-mail : contact@raudi.com</li>
+            </ul>
+          </div>
+        </footer>
       </div>
     </Router>
   );
