@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import '../style/Accueil.css';  
+import { Link } from "react-router-dom";
 
 function Accueil() {
   const [voitures, setVoitures] = useState([]);
@@ -24,12 +25,14 @@ function Accueil() {
       <h2 className='h2Accueil'>Liste des modèles</h2>
       <ul className='ulCard'>
         {voitures.map((car) => (
-          <li className='liCard' key={car.id}>
-            <div className="card">
-              <h3 className='h3Card'>Raudi {car.name}</h3>
-              <img src={require("../assets/" + car.name + ".jpg")}alt={car.name} />
-            </div>
-          </li>
+          <Link to={"/details/" + car.name} className='liCard'>
+            <li key={car.id}>
+              <div className="card">
+                <h3 className='h3Card'>Raudi {car.name}</h3>
+                <img src={require("../assets/" + car.name + ".jpg")}alt={car.name} />
+              </div>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
