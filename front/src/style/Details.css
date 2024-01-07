@@ -1,0 +1,44 @@
+/* Details.css */
+.detailsTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .detailsContainer {
+    margin: 2% 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .cardDetails {
+    width: 60%;
+    margin-left: 20%;
+    border: 2px solid #6a6a6a;
+    background-color: rgb(235, 235, 235);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  .carImage {
+    max-width: 80%;
+    margin-left: 10%;
+    max-height: 600px;
+  }
+  
+  .carDetails {
+    margin: 2% 0;
+    display: flex;
+  }
+  
+  .carName {
+    font-size: 40px;
+    text-align: center;
+  }
+  
+  .carProperty {
+    text-align: center;
+    font-size: 1.5em;
+    width: 26.66%;
+    margin-left: 5%;
+  }
+  

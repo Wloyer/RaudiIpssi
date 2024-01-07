@@ -3,6 +3,7 @@ const route = express.Router()
 const carController = require('../controllers/carControllers')
 
 route.get('/getAllCar', carController.getAllCar)
+route.get('/getCar/:ref', carController.getCar)
 route.post('/createCar', carController.createCar)
 route.put('/updateCar/:id', carController.updateCar)
 route.delete('/deleteCar/:id', carController.deleteCar)

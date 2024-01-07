@@ -8,6 +8,21 @@ exports.getAllCar = async(req,res) => {
     })
 };
 
+exports.getCar = async (req, res) => {
+        const carName = req.params.ref;
+
+        const car = await Car.findOne({
+            where: {
+                name: carName,
+            }
+        });
+
+        res.status(200).json({
+            message: "Voici la voiture demandée",
+            car: car
+        });
+};
+
 exports.createCar = async(req,res)=>{
     let car = req.body 
     await Car.create(car)
@@ -16,10 +31,6 @@ exports.createCar = async(req,res)=>{
 
 exports.updateCar = async(req,res)=>{
     let idC = req.params.id
-    let nameC = req.params.name
-    let doorC = req.params.door
-    let engineC = req.params.engine
-    let seating_capacityC = req.params.seating_capacity
     let UpdateDataCar = req.body
 
     let car = await Car.update(UpdateDataCar,{
