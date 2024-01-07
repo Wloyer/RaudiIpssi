@@ -8,23 +8,47 @@ require('dotenv').config();
 
 const UserController = {
 
-    // Créer un nouvel utilisateur
+    // Inscription d'un utilisateur
+    async register(req, res) {
+        jsonParser(req, res, async () => {
+            try {
+                const { firstName, lastName, email, password } = req.body;
+                const existingUser = await User.findOne({ where: { email } });
+                if (existingUser) {
+                    return res.status(409).json({ message: "Email déjà utilisé" });
+                }
+                const hashedPassword = await bcrypt.hash(password, 10);
+                const newUser = await User.create({
+                    firstName,
+                    lastName,
+                    email,
+                    password: hashedPassword,
+                    role: 'utilisateur'
+                });
+                const token = jwt.sign({ id: newUser.id, email: newUser.email, role: newUser.role }, process.env.SECRET_KEY, { expiresIn: '1h' });
+                res.status(201).json({ user: { id: newUser.id, firstName, lastName, email, role }, token });
+            } catch (error) {
+                res.status(400).json({ error: error.message });
+            }
+        });
+    },
 
-    async createUser(req, res) {
+    // Connexion d'un utilisateur
+    async login(req, res) {
         try {
-            const { firstName, lastName, email, password, role } = req.body;
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            const newUser = await User.create({
-                firstName,
-                lastName,
-                email,
-                password: hashedPassword,
-                role
-            });
-            res.status(201).json(newUser);
+            const { email, password } = req.body;
+            const user = await User.findOne({ where: { email } });
+            if (!user) {
+                return res.status(401).json({ message: "Email ou mot de passe incorrect" });
+            }
+            const isMatch = await bcrypt.compare(password, user.password);
+            if (!isMatch) {
+                return res.status(401).json({ message: "Email ou mot de passe incorrect" });
+            }
+            const token = jwt.sign({ id: user.id, email: user.email, role: user.role }, process.env.SECRET_KEY, { expiresIn: '1h' });
+            res.status(200).json({ message: "Connexion réussie", token });
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            res.status(500).json({ error: error.message });
         }
     },
 
@@ -50,6 +74,7 @@ const UserController = {
             res.status(400).json({ error: error.message });
         }
     },
+
     // Mettre à jour un utilisateur
     async updateUser(req, res) {
         try {

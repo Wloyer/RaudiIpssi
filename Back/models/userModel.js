@@ -18,13 +18,10 @@ const User = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    ordered:{
-        type: DataTypes.STRING,
-        allowNull: true
-    },
     role: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false,
+        defaultValue: 'utilisateur'
     },
     email: {
         type: DataTypes.STRING,

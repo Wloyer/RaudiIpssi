@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import '../style/App.css'
 
@@ -12,19 +12,26 @@ import Connexion from './Connexion';
 import Inscription from './Inscription';
 
 function App() {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsUserLoggedIn(!!token); 
+  }, []);
+
   return (
     <Router>
       <div className='contenu'>
-        <nav>
+        <nav className='navApp'>
           <ul className="nav-left">
-            <li><Link to="/">Accueil</Link></li>
-            <li><Link to="/customisation">Customisation</Link></li>
-            <li><Link to="/historique">Historique</Link></li>
-            <li><Link to="/admin">Admin</Link></li>
+            <li className='liAppNav'><Link className='aAppNav' to="/">Accueil</Link></li>
+            <li className='liAppNav'><Link className='aAppNav' to="/customisation">Customisation</Link></li>
+            <li className='liAppNav'><Link className='aAppNav' to="/historique">Historique</Link></li>
+            <li className='liAppNav'><Link className='aAppNav' to="/admin">Admin</Link></li>
           </ul>
-          <ul className="nav-right">
-            <li><Link to="/connexion">Connexion</Link></li>
-            <li><Link to="/inscription">Inscription</Link></li>
+          <ul className={isUserLoggedIn ? "nav-right hidden" : "nav-right"}>
+            <li className='liAppNav'><Link className='aAppNav' to="/connexion">Connexion</Link></li>
+            <li className='liAppNav'><Link className='aAppNav' to="/inscription">Inscription</Link></li>
           </ul>
         </nav>
         <main>
@@ -41,14 +48,14 @@ function App() {
         <footer>
           <div className='footer'>
             <ul className="footer-left">
-              <li><a href='https://youtube.com' target='_blank'>Mentions légales</a></li>
-              <li><a href='https://youtube.com' target='_blank'>Paramètres des cookies</a></li>
-              <li><a href='https://youtube.com' target='_blank'>CGU</a></li>
+              <li><a className='aAppFooter' href='https://youtube.com' target='_blank'>Mentions légales</a></li>
+              <li><a className='aAppFooter' href='https://youtube.com' target='_blank'>Paramètres des cookies</a></li>
+              <li><a className='aAppFooter' href='https://youtube.com' target='_blank'>CGU</a></li>
             </ul>
             <ul className="footer-right">
-              <li>Numéro de téléphone : 01.69.69.25.52</li>
-              <li>Adresse postale : 123 Rue de l'Exemple, Paris</li>
-              <li>Adresse e-mail : contact@raudi.com</li>
+              <li className='liAppFooter'>Numéro de téléphone : 01.69.69.25.52</li>
+              <li className='liAppFooter'>Adresse postale : 123 Rue de l'Exemple, Paris</li>
+              <li className='liAppFooter'>Adresse e-mail : contact@raudi.com</li>
             </ul>
           </div>
         </footer>
