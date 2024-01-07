@@ -7,7 +7,9 @@ const carRoute = require('./routes/carRoute')
 const optionRoute = require('./routes/optionRoute')
 const orderedRoute = require('./routes/orderedRoute')
 const app = express()
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
 app.use(express.json())
 app.use(cors())
 
