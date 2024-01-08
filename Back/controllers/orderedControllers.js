@@ -1,6 +1,7 @@
 const Order = require('../models/orderedModel'); 
 const User = require('../models/userModel');
 const Car = require('../models/carModel');
+const sequelize = require('../database/database');
 
 
 
@@ -101,13 +102,37 @@ const OrderedController = {
             });
             res.status(200).json({
                 success: true,
-                message: "Voici l'historique des commandes",
+                message: "Voici l'historique de toutes les commandes",
                 orders:orders
             });
         } else {
             res.status(400).json({
                 success: false,
                 message: "Vous n'êtes pas autorisé à accéder à l'historique des commandes"
+            });
+        }
+    },
+
+    async getMonthlyReport(req,res){
+        if (req.user.role === 'comptable' || req.user.role === 'admin') {
+            const monthlyReport = await Order.findAll({
+                attributes: [
+                    [sequelize.fn('MONTH', sequelize.col('createdAt')), 'month'],
+                    [sequelize.fn('COUNT', sequelize.col('id')), 'totalOrders'],
+                    [sequelize.fn('SUM', sequelize.col('price')), 'totalPrice']
+                ],
+                group: [sequelize.fn('MONTH', sequelize.col('createdAt'))],
+                include: [{model: User}],
+            });
+            res.status(200).json({
+                success: true,
+                message: "Récapitulatif des commandes clients par mois",
+                monthlyReport: monthlyReport
+            });
+        } else {
+            res.status(400).json({
+                success: false,
+                message: "Vous n'avez pas les autorisations pour accéder à cet espace"
             });
         }
     }
@@ -134,5 +159,29 @@ exports.getOrderedHistory = async (req,res) => {
         });
     }
 } */
-
+/* 
+exports.getMonthlyReport = async(req,res) => {
+    if (req.user.role === 'comptable') {
+        const monthlyReport = await Order.findAll({
+            attributes: [
+                [sequelize.fn('MONTH', sequelize.col('createdAt')), 'month'],
+                [sequelize.fn('COUNT', sequelize.col('id')), 'totalOrders'],
+                [sequelize.fn('SUM', sequelize.col('price')), 'totalPrice']
+            ],
+            group: [sequelize.fn('MONTH', sequelize.col('createdAt'))],
+            include: [{model: User}],
+        });
+        res.status(200).json({
+            success: true,
+            message: "Récapitulatif des commandes clients par mois",
+            monthlyReport: monthlyReport
+        });
+    } else {
+        res.status(400).json({
+            success: false,
+            message: "Vous n'avez pas les autorisations pour accéder à cet espace"
+        });
+    }
+}
+ */
 module.exports = OrderedController;
