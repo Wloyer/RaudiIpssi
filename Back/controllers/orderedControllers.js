@@ -90,7 +90,7 @@ const OrderedController = {
 
     // historique des commandes pour rôles comptable et admin 
     async getOrderedHistory(req,res) {
-        if (req.user.role === 'comptable' || req.user.role === 'admin') {
+        if (req.user.role === 'comptable') {
             const orders = await Order.findAll({
                 include: [{model:User}],
             });
@@ -108,7 +108,7 @@ const OrderedController = {
     },
 
     async getMonthlyReport(req,res){
-        if (req.user.role === 'comptable' || req.user.role === 'admin') {
+        if (req.user.role === 'comptable') {
             const monthlyReport = await Order.findAll({
                 attributes: [
                     [sequelize.fn('MONTH', sequelize.col('createdAt')), 'month'],
