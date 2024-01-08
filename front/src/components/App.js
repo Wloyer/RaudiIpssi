@@ -34,6 +34,8 @@ function App() {
 
   const handleLogout = () => {
     Cookies.remove('token');
+    localStorage.setItem('token');
+    localStorage.setItem('role');
     Cookies.remove('role');
     setIsUserLoggedIn(false);
     setRole("");
