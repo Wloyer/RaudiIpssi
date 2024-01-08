@@ -35,16 +35,8 @@ const Car = sequelize.define("car", {
 });
 Car.associate = (models) => {
   Car.belongsTo(models.User, { as: "Owner", foreignKey: "userId" });
-  Car.belongsToMany(models.Option, {
-    through: "CarOptions",
-    as: "Options",
-    foreignKey: "carId",
-  });
-  Option.belongsToMany(models.Car, {
-    through: models.Order,
-    as: "Cars",
-    foreignKey: "optionId",
-  });
+  Car.belongsToMany(Option, { through: 'CarOptions' });
+  Option.belongsToMany(Car, { through: 'CarOptions' });
   Car.hasMany(models.Order, { as: "Orders", foreignKey: "carId" });
 };
 
