@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../style/Admin.css';
 
 function AdminCarsAdd() {
@@ -10,6 +11,30 @@ function AdminCarsAdd() {
     seating_capacity: '',
   });
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fonction pour vérifier si l'utilisateur est autorisé à accéder à cette page
+    const checkAuthorization = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/car/checkAuth', {
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        });
+
+        if (response.status !== 200) {
+          navigate('/');
+        }
+      } catch (error) {
+        console.error('Erreur d\'autorisation:', error);
+        navigate('/');
+      }
+    };
+
+    checkAuthorization();
+  }, [navigate]);
+
   const handleChange = (e) => {
     setCarData({ ...carData, [e.target.name]: e.target.value });
   };
@@ -17,13 +42,18 @@ function AdminCarsAdd() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        await axios.post(`http://127.0.0.1:8000/car/createCar`, carData);
-        console.log('Voiture créée avec succès!');
-        window.location.href = '/admin/cars';
-      } catch (error) {
-        console.error('Une erreur s\'est produite lors de la mise à jour de l\'utilisateur:', error.message);
-      }
+      await axios.post('http://127.0.0.1:8000/car/createCar', carData, {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      });
+      console.log('Voiture créée avec succès!');
+      navigate('/admin/cars');
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la création de la voiture:', error);
+    }
   };
+
 
   return (
     <div className="update-user-container">

@@ -3,10 +3,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import '../style/Details.css';  
 import { useParams } from 'react-router-dom';
+import Customisation from './Customisation';
+import { BrowserRouter as  Route} from 'react-router-dom';
 
 function Details() {
   const [car, setCar] = useState({});
   const { id } = useParams();
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +35,7 @@ function Details() {
           <p className="carProperty">Nombre de portes : {car.door}</p>
           <p className="carProperty">Type de moteur : {car.engine}</p>
           <p className="carProperty">Capacité d'assise : {car.seating_capacity}</p>
+          <Route path="/customisation" element={<Customisation />} />
         </div>
       </div>
     </div>

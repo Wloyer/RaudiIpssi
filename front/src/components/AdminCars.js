@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import '../style/Admin.css';
 
 function AdminCars() {
   const [cars, setCars] = useState([]);
+  const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/car/getAllCar');
-      setCars(response.data.car);
+      const response = await axios.get('http://127.0.0.1:8000/car/getAllCar', {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      });
+
+      if (response.status === 403) {
+        alert('Accès non autorisé');
+        navigate('/');
+      } else {
+        setCars(response.data.car);
+      }
     } catch (error) {
-      console.error('Une erreur s\'est produite lors de la récupération des données:', error);
+      console.error('Une erreur s\'est produite:', error);
+      navigate('/');
     }
   };
 
@@ -21,13 +33,16 @@ function AdminCars() {
 
   const deleteCar = async (idCar) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/car/deleteCar/${idCar}`);
+      await axios.delete(`http://127.0.0.1:8000/car/deleteCar/${idCar}`, {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      });
       fetchData();
     } catch (error) {
-      console.error('Une erreur s\'est produite lors de la suppression des données:', error);
+      console.error('Erreur lors de la suppression:', error);
     }
   };
-
   return (
     <div className="admin-container">
       <h2>Liste des modèles</h2>

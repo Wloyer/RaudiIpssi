@@ -1,7 +1,6 @@
-// UpdateUser.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../style/Admin.css';
 
 function UpdateUser() {
@@ -12,38 +11,59 @@ function UpdateUser() {
     email: '',
     role: '',
   });
-
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const checkAuthorization = async () => {
+      try {
+        const authResponse = await axios.get('http://127.0.0.1:8000/user/checkAuth', {
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        });
+
+        if (authResponse.status === 200) {
+          fetchData();
+        } else {
+          navigate('/');
+        }
+      } catch (error) {
+        console.error('Erreur d\'autorisation:', error);
+        navigate('/');
+      }
+    };
+
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://127.0.0.1:8000/user/getUser/${id}`);
         setUser(response.data);
       } catch (error) {
-        console.error('Une erreur s\'est produite lors de la récupération des données:', error.message);
+        console.error('Une erreur s\'est produite lors de la récupération des données:', error);
       }
     };
 
-    fetchData();
-  }, [id]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios.put(`http://127.0.0.1:8000/user/updateUser/${id}`, user);
-      console.log('Utilisateur mis à jour avec succès!');
-      window.location.href = '/admin/users';
-    } catch (error) {
-      console.error('Une erreur s\'est produite lors de la mise à jour de l\'utilisateur:', error.message);
-    }
-  };
+    checkAuthorization();
+  }, [id, navigate]);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://127.0.0.1:8000/user/updateUser/${id}`, user, {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      });
+      console.log('Utilisateur mis à jour avec succès!');
+      navigate('/admin/users');
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la mise à jour de l\'utilisateur:', error);
+    }
+  };
   return (
     <div className="update-user-container">
       <h2 className="h2UpdateUser">Mise à jour de l'utilisateur</h2>

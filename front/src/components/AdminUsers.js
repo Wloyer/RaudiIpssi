@@ -1,10 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import '../style/Admin.css';
 
 function AdminUsers() {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkAuthorization = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/user/getAllUsers', {
+          headers: {
+            'Authorization': localStorage.getItem('token')
+          }
+        });
+
+        if (response.status !== 200) {
+          navigate('/');
+        } else {
+          fetchData();
+        }
+      } catch (error) {
+        console.error('Erreur d\'autorisation:', error);
+        navigate('/');
+      }
+    };
+
+    checkAuthorization();
+  }, [navigate]);
 
   const fetchData = async () => {
     try {
@@ -15,10 +39,6 @@ function AdminUsers() {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const deleteUser = async (idUser) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/user/deleteUser/${idUser}`);
@@ -27,7 +47,6 @@ function AdminUsers() {
       console.error('Une erreur s\'est produite lors de la suppression des données:', error);
     }
   };
-
   return (
     <div className="admin-container">
       <h2>Liste des Utilisateurs</h2>
