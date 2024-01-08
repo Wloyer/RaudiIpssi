@@ -13,40 +13,15 @@ const Option = sequelize.define('option', {
         autoIncrement: true
     },
     //deuxième colonne
-    ac: {
-        type: DataTypes.BOOLEAN,
+    name: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     //troisième colonne
-    transmission: {
-        type: DataTypes.STRING,
-        allowNull: false,
+    prix: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
     },
-    //quatrième colonne
-    roof: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-     //cinqième colonne
-     automatic_parking: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    },
-     //sixème colonne
-     rearview_camera: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    }
 });
-
-
-Option.associate = (models) => {
-    Option.belongsToMany(models.Car, { 
-        through: 'CarOptions', 
-        as: 'Cars', 
-        foreignKey: 'optionId' 
-    });
-    
-};
 
 module.exports = Option
