@@ -1,6 +1,7 @@
 const express = require('express')
 const route = express.Router()
 const orderedController = require('../controllers/orderedControllers'); 
+const { isAuthenticated, hasRole } = require('../middleware/middleware');
 
 oute.post('/orders', isAuthenticated, hasRole(['admin', 'comptable', 'utilisateur']), orderedController.createOrder);
 route.get('/orders/:id', isAuthenticated, hasRole(['admin', 'comptable', 'utilisateur']), orderedController.getOrder);
