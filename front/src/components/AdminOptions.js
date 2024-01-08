@@ -55,32 +55,7 @@ function AdminOptions() {
             </tr>
           ))}
         </tbody>
-      </table>
-      <h2>Liste des modèles</h2>
-      <Link to="/admin/adminOptionsAdd" className='buttonAdd'>Ajouter une option</Link>
-      <table className="user-table">
-        <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nom</th>
-              <th>Prix</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-        <tbody>
-          {options.map(option => (
-            <tr key={option.id}>
-              <td>{option.id}</td>
-              <td>{option.name}</td>
-              <td>{option.price}€</td>
-              <td>
-                <Link to={`/admin/adminOptionPut/${option.id}`}>Modifier</Link> |&nbsp;
-                <Link onClick={() => deleteOption(option.id)}>Supprimer</Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      </table>    
     </div>
   );
 }

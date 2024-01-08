@@ -28,6 +28,7 @@ function Connexion() {
             if (response.ok) {
                 Cookies.set('token', data.token);
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('role', data.role);
                 Cookies.set('role', data.role);
                 Cookies.set('id', data.id);
                 window.location.href = '/';
