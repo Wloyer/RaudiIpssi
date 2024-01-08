@@ -34,7 +34,7 @@ function OrderHistory() {
           {orders.map(order => (
             <tr key={order.id}>
               <td>{order.id}</td>
-              <td>{order.userId}</td> {/* Assurez-vous que ces champs correspondent à votre structure de données */}
+              <td>{order.userId}</td> 
               <td>{order.carId}</td>
               <td>{order.price}</td>
             </tr>
