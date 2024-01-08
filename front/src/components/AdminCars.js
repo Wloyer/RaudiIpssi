@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from "react-router-dom";
 import '../style/Admin.css';
+import Cookies from 'js-cookie';
 
 function AdminCars() {
   const [cars, setCars] = useState([]);
@@ -35,7 +36,7 @@ function AdminCars() {
     try {
       await axios.delete(`http://127.0.0.1:8000/car/deleteCar/${idCar}`, {
         headers: {
-          'Authorization': localStorage.getItem('token')
+          'Authorization': Cookies.getItem('token')
         }
       });
       fetchData();

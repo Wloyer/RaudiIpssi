@@ -1,37 +1,67 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../style/Historique.css';  
+import { useNavigate } from 'react-router-dom';
+import '../style/Accueil.css'; 
+import Cookies from 'js-cookie';
 
-function Historique() {
+
+function OrderHistory() {
+  const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
+  const userRole = Cookies.get('role'); 
 
   useEffect(() => {
-    const checkAuthorization = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/checkAuth', {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        });
+    if (userRole !== 'admin' && userRole !== 'comptable') {
+      // Si l'utilisateur n'est ni admin ni comptable, redirigez vers la page d'accueil.
+      navigate('/');
+      return;
+    }
 
-        if (response.status !== 200) {
-          navigate('/connexion');
-        }
-      } catch (error) {
-        console.error('Erreur d\'autorisation:', error);
-        navigate('/connexion');
+    // Déterminez l'URL en fonction du rôle de l'utilisateur
+    const url = userRole === 'admin' || userRole === 'comptable' 
+      ? '/ordered/monthly' 
+      : '/ordered/history';
+
+    axios.get(url, {
+      headers: {
+        'Authorization': Cookies.get('token')
       }
-    };
+    })
+    .then(response => {
+      setOrders(response.data);
+    })
+    .catch(error => {
+      console.error('Erreur lors de la récupération des données:', error);
+      navigate('/');
+    });
+  }, [navigate, userRole]);
 
-    checkAuthorization();
-  }, [navigate]);
-  
   return (
-    <div>
-      <h2>Historique</h2>
+    <div className="order-history-container">
+      <h2>Historique des Commandes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Utilisateur</th>
+            <th>Voiture</th>
+            <th>Prix</th>
+            <th>Date de Commande</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map(order => (
+            <tr key={order.id}>
+              <td>{order.id}</td>
+              <td>{order.price}</td>
+              <td>{order.userId}</td> {/* Assurez-vous que ces champs correspondent à votre structure de données */}
+              <td>{order.carId}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-};
+}
 
-export default Historique;
+export default OrderHistory;
