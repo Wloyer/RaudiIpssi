@@ -1,0 +1,127 @@
+  .h2Admin{
+    font-size: 2em;
+  }
+  
+  .admin-cards {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 5%;
+  }
+  
+  .admin-card {
+    border: 1px solid grey;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    color: #333;
+    width: 400px;
+    transition: transform 0.2s ease-in-out;
+    font-size: 1.3em;
+    background-color: rgba(221, 224, 223, 0.8);
+  }
+  
+  .admin-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .admin-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .user-table th, .user-table td {
+    border: 1px solid #a4a1a1;
+    padding: 8px;
+    background-color: #ddd;
+  }
+  
+  .user-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .user-table tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .user-table a {
+    text-decoration: none;
+    color: #3498db;
+  }
+
+  /* UpdateUser.css */
+
+.update-user-container {
+  max-width: 500px;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #8e8e8e;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: rgba(227, 227, 227, 0.8);
+}
+
+.update-user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelUpdateUser {
+  margin-bottom: 8px;
+}
+
+.h2UpdateUser {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.inputUpdateUser {
+  padding: 10px;
+  margin-bottom: 16px;
+}
+
+.inputUpdateUser[type="text"],
+.inputUpdateUser[type="email"],
+.inputUpdateUser[type="password"],
+.inputUpdateUser[type="select"] {
+  border-radius: 5px;
+  border: 0.3px solid black;
+}
+
+.buttonUpdateUser {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-size: 1.3em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttonUpdateUser:hover {
+  background-color: #45a049;
+}
+
+.buttonAdd {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  font-size: 1.3em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttonAdd:hover {
+  background-color: #45a049;
+}

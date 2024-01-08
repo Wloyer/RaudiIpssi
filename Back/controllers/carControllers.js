@@ -9,11 +9,11 @@ exports.getAllCar = async(req,res) => {
 };
 
 exports.getCar = async (req, res) => {
-        const carName = req.params.ref;
+        const carId = req.params.id;
 
         const car = await Car.findOne({
             where: {
-                name: carName,
+                id: carId,
             }
         });
 

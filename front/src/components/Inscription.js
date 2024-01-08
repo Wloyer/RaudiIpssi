@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../style/Inscription.css';
+import Cookies from 'js-cookie';
 
 function Inscription() {
     const [formData, setFormData] = useState({
@@ -24,8 +25,10 @@ function Inscription() {
                 body: JSON.stringify(formData)
             });
             const data = await response.json();
+            console.log(data)
             if (data.token) {
-                localStorage.setItem('token', data.token);
+                Cookies.set('token', data.token);
+                Cookies.set('role', data.role);
                 window.location.href = '/';
                 console.log('Inscription réussie');
             } else {

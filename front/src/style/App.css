@@ -40,6 +40,10 @@ main {
     text-decoration: none;
 }
 
+.navApp .button {
+    cursor: pointer;
+}
+
 .navApp .aAppNav:hover {
     background-color: #ddd;
     color: black;

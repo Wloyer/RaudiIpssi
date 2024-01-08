@@ -1,5 +1,6 @@
 // Connexion.js
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import '../style/Connexion.css';
 
 function Connexion() {
@@ -25,7 +26,8 @@ function Connexion() {
 
             const data = await response.json();
             if (response.ok) {
-                localStorage.setItem('token', data.token);
+                Cookies.set('token', data.token);
+                Cookies.set('role', data.role);
                 window.location.href = '/';
             } else {
                 console.error('Échec de la connexion:', data.message);

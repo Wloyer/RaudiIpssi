@@ -31,10 +31,6 @@ const Car = sequelize.define("car", {
   seating_capacity: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  },
-  photoUrl: {
-    type: DataTypes.STRING,
-    allowNull: true,
   }
 });
 Car.associate = (models) => {
