@@ -7,7 +7,7 @@ function OrderHistory() {
 
   useEffect(() => {
     // La requête est effectuée sans vérification du rôle de l'utilisateur
-    axios.get('/ordered/history') // Utilisez l'URL appropriée pour votre API
+    axios.get('/history') // Utilisez l'URL appropriée pour votre API
     .then(response => {
       setOrders(response.data);
     })
