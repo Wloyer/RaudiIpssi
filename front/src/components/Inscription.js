@@ -28,7 +28,9 @@ function Inscription() {
             console.log(data)
             if (data.token) {
                 Cookies.set('token', data.token);
+                localStorage.setItem('token', data.token);
                 Cookies.set('role', data.role);
+                localStorage.setItem('role', data.role);
                 window.location.href = '/';
                 console.log('Inscription réussie');
             } else {

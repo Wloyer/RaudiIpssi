@@ -15,36 +15,30 @@ function UpdateUser() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkAuthorization = async () => {
-      try {
-        const authResponse = await axios.get('http://127.0.0.1:8000/user/checkAuth', {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        });
+    const role = localStorage.getItem('role');
 
-        if (authResponse.status === 200) {
-          fetchData();
-        } else {
-          navigate('/');
-        }
-      } catch (error) {
-        console.error('Erreur d\'autorisation:', error);
-        navigate('/');
-      }
-    };
+    // Redirection si l'utilisateur n'est pas admin
+    if (role !== 'admin') {
+      console.error('Accès non autorisé');
+      navigate('/');
+      return;
+    }
 
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/user/getUser/${id}`);
-        setUser(response.data);
-      } catch (error) {
-        console.error('Une erreur s\'est produite lors de la récupération des données:', error);
-      }
-    };
-
-    checkAuthorization();
+    fetchData();
   }, [id, navigate]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/user/getUser/${id}`, {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      });
+      setUser(response.data);
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la récupération des données:', error);
+    }
+  };
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });

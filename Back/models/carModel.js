@@ -1,5 +1,9 @@
 const sequelize = require("../database/database");
 const { DataTypes } = require("sequelize");
+const Option = require("./optionModel");
+const User = require("./userModel");
+const Order = require("./orderModel");
+const Car = require("./carModel");
 //ici importation des modeles avec lesquels lier cette table
 
 //table Car et champs
