@@ -27,7 +27,9 @@ function Connexion() {
             const data = await response.json();
             if (response.ok) {
                 Cookies.set('token', data.token);
+                localStorage.setItem('token', data.token);
                 Cookies.set('role', data.role);
+                localStorage.setItem('role', data.role);
                 window.location.href = '/';
             } else {
                 console.error('Échec de la connexion:', data.message);

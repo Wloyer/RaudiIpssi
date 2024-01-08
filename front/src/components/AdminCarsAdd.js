@@ -15,24 +15,12 @@ function AdminCarsAdd() {
 
   useEffect(() => {
     // Fonction pour vérifier si l'utilisateur est autorisé à accéder à cette page
-    const checkAuthorization = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/car/checkAuth', {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        });
+    const role = localStorage.getItem('role');
 
-        if (response.status !== 200) {
-          navigate('/');
-        }
-      } catch (error) {
-        console.error('Erreur d\'autorisation:', error);
-        navigate('/');
-      }
-    };
-
-    checkAuthorization();
+    if (role !== 'admin') {
+      console.error('Accès non autorisé');
+      navigate('/');
+    }
   }, [navigate]);
 
   const handleChange = (e) => {

@@ -32,7 +32,11 @@ function AdminUsers() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/user/getAllUsers');
+      const response = await axios.get('http://127.0.0.1:8000/user/getAllUsers', {
+        headers: {
+          'Authorization': localStorage.getItem('token')
+        }
+      });
       setUsers(response.data);
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la récupération des données:', error);

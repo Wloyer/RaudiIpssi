@@ -3,7 +3,7 @@ const route = express.Router()
 const orderedController = require('../controllers/orderedControllers'); 
 const { isAuthenticated, hasRole } = require('../middleware/middleware');
 
-oute.post('/orders', isAuthenticated, hasRole(['admin', 'comptable', 'utilisateur']), orderedController.createOrder);
+route.post('/orders', isAuthenticated, hasRole(['admin', 'comptable', 'utilisateur']), orderedController.createOrder);
 route.get('/orders/:id', isAuthenticated, hasRole(['admin', 'comptable', 'utilisateur']), orderedController.getOrder);
 route.put('/orders/:id', isAuthenticated, hasRole(['admin']), orderedController.updateOrder);
 route.delete('/orders/:id', isAuthenticated, hasRole(['admin']), orderedController.deleteOrder);

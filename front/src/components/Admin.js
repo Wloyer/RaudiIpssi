@@ -18,10 +18,10 @@ function Admin() {
           alert('Accès non autorisé');
           navigate('/');
       } else if (!response.ok) {
-          // Gérez d'autres types d'erreurs ici
           throw new Error(`Erreur HTTP: ${response.status}`);
+      } else if (response.headers.get("Content-Type")?.includes("application/json")) {
+          return response.json(); // Convertir en JSON seulement si la réponse est du JSON
       }
-      return response.json(); // Convertissez la réponse en JSON si nécessaire
     })
     .then(data => {
       // Utilisez les données ici si nécessaire
@@ -31,6 +31,7 @@ function Admin() {
       navigate('/');
     });
   }, [navigate]);
+
 
   return (
     
