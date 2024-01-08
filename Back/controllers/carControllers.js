@@ -1,4 +1,7 @@
-const Car = require('../models/carModel')
+const Order = require('../models/orderedModel'); 
+const User = require('../models/userModel');
+const Car = require('../models/carModel');
+const orderedOptions = require('../models/orderedOptionsModel');
 
 exports.getAllCar = async(req,res) => {
     let allCar = await Car.findAll();

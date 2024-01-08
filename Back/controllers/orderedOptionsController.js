@@ -1,6 +1,7 @@
-// orderedOptionsController.js
-
-const orderedOptions = require("../models/ordoredOptionsModel");
+const Order = require('../models/orderedModel'); 
+const User = require('../models/userModel');
+const Car = require('../models/carModel');
+const orderedOptions = require('../models/orderedOptionsModel');
 
 const orderedOptionsController = {
   // Créer une nouvelle association orderedOptions

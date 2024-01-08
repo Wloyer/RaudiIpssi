@@ -1,8 +1,8 @@
 const sequelize = require('../database/database')
-const Car = require('../models/carModel')
-const User = require('../models/userModel')
-const Option = require('../models/optionModel')
-const Ordered = require('../models/orderedModel')
+const Order = require('../models/orderedModel'); 
+const User = require('../models/userModel');
+const Car = require('../models/carModel');
+const orderedOptions = require('../models/orderedOptionsModel');
 
 exports.createAllTable = async (req, res) => {
     try {

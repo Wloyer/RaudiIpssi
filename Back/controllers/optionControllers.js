@@ -1,5 +1,8 @@
-const Option = require('../models/optionModel')
-
+const Order = require('../models/orderedModel'); 
+const User = require('../models/userModel');
+const Car = require('../models/carModel');
+const Option = require('../models/optionModel');
+const orderedOptions = require('../models/orderedOptionsModel');
 
 exports.getAllOption = async(req,res)=>{
     let allOption = await Option.findAll();
