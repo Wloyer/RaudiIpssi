@@ -21,6 +21,8 @@ const Order = sequelize.define("Order", {
   },
 });
 
+
+
 Order.associate = (models) => {
   Order.belongsTo(models.User, { as: "User", foreignKey: "userId" });
   Order.belongsTo(models.orderedOptions, { as: "orderedOptions", foreignKey: "orderId" });
