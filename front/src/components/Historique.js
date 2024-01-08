@@ -6,14 +6,14 @@ function OrderHistory() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    // La requête est effectuée sans vérification du rôle de l'utilisateur
-    axios.get('/history') // Utilisez l'URL appropriée pour votre API
+
+    axios.get('http://localhost:8000/ordered/history') 
     .then(response => {
       setOrders(response.data);
     })
     .catch(error => {
       console.error('Erreur lors de la récupération des données:', error);
-      // Vous pouvez choisir de gérer l'erreur différemment, par exemple, afficher un message d'erreur
+
     });
   }, []);
 
