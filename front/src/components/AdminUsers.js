@@ -43,9 +43,9 @@ function AdminUsers() {
     }
   };
 
-  const deleteUser = async (idUser) => {
+  const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/user/deleteUser/${idUser}`);
+      await axios.delete(`http://127.0.0.1:8000/user/deleteUser/${id}`);
       fetchData();
     } catch (error) {
       console.error('Une erreur s\'est produite lors de la suppression des données:', error);
