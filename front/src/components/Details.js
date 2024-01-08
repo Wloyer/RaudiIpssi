@@ -35,7 +35,6 @@ function Details() {
           <p className="carProperty">Nombre de portes : {car.door}</p>
           <p className="carProperty">Type de moteur : {car.engine}</p>
           <p className="carProperty">Capacité d'assise : {car.seating_capacity}</p>
-          <Route path="/customisation" element={<Customisation />} />
         </div>
       </div>
     </div>
