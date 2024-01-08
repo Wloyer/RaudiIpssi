@@ -11,10 +11,6 @@ const Order = sequelize.define("Order", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  orderDate: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -27,6 +23,7 @@ const Order = sequelize.define("Order", {
 
 Order.associate = (models) => {
   Order.belongsTo(models.User, { as: "User", foreignKey: "userId" });
+  Order.belongsTo(models.orderedOptions, { as: "orderedOptions", foreignKey: "orderId" });
   Order.belongsTo(models.Car, { as: "Car", foreignKey: "carId" });
 };
 

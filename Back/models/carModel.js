@@ -24,17 +24,21 @@ const Car = sequelize.define("car", {
   //troisième colonne
   door: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   //quatrième colonne
   engine: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   //cinqième colonne
   seating_capacity: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
+  },
+  price: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
   }
 });
 Car.associate = (models) => {

@@ -1,34 +1,40 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// Customisation.js
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import '../style/Customisation.css';  
+import { Link } from "react-router-dom";
 
 function Customisation() {
-  const navigate = useNavigate();
+  const [voitures, setVoitures] = useState([]);
 
   useEffect(() => {
-    const checkAuthorization = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/checkAuth', {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        });
-
-        if (response.status !== 200) {
-          navigate('/connexion');
-        }
+        const response = await axios.get('http://127.0.0.1:8000/car/getAllCar');
+        setVoitures(response.data.car);
       } catch (error) {
-        console.error('Erreur d\'autorisation:', error);
-        navigate('/connexion');
+        console.error('Une erreur s\'est produite lors de la récupération des données:', error);
       }
     };
 
-    checkAuthorization();
-  }, [navigate]);
+    fetchData();
+  }, []);
+
   return (
     <div>
-      <h2>Customisation</h2>
+      <h2 className='h2Accueil'>Customisation</h2>
+      <ul className='ulCard'>
+        {voitures.map((car) => (
+          <Link to={"/customisation/" + car.id} className='liCard'>
+            <li key={car.id}>
+              <div className="card">
+                <h3 className='h3Card'>Raudi {car.name}</h3>
+                <img src={require("../assets/" + car.name + ".jpg")}alt={car.name} />
+              </div>
+            </li>
+          </Link>
+        ))}
+      </ul>
     </div>
   );
 };

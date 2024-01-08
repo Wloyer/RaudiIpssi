@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import Accueil from './Accueil';
 import Historique from './Historique';
 import Customisation from './Customisation';
+import CustomVehi from './CustomVehi';
 import Admin from './Admin';
 import Details from './Details';
 import Connexion from './Connexion';
@@ -14,6 +15,8 @@ import Inscription from './Inscription';
 import AdminUsers from './AdminUsers';
 import AdminCars from './AdminCars';
 import AdminOptions from './AdminOptions';
+import AdminOptionsAdd from './AdminOptionsAdd';
+import AdminOptionPut from './AdminOptionsPut';
 import AdminUsersPut from './AdminUsersPut';
 import AdminCarsAdd from './AdminCarsAdd';
 import AdminCarsPut from './AdminCarsPut';
@@ -59,6 +62,7 @@ function App() {
             <Route path="/" element={<Accueil />} />
             <Route path="/historique" element={<Historique />} />
             <Route path="/customisation" element={<Customisation />} />
+            <Route path="/customisation/:id" element={<CustomVehi />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/connexion" element={<Connexion />} />
             <Route path="/inscription" element={<Inscription />} />
@@ -67,6 +71,8 @@ function App() {
             <Route path="/admin/users" element={<AdminUsers />} />
             <Route path="/admin/cars" element={<AdminCars />} />
             <Route path="/admin/options" element={<AdminOptions />} />
+            <Route path="/admin/adminOptionsAdd" element={<AdminOptionsAdd />} />
+            <Route path="/admin/adminOptionPut/:id" element={<AdminOptionPut />} />
             <Route path="/admin/adminCarsAdd" element={<AdminCarsAdd />} />
             <Route path="/admin/adminCarPut/:id" element={<AdminCarsPut />} />
           </Routes>

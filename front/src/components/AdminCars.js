@@ -55,6 +55,7 @@ function AdminCars() {
               <th>Portes</th>
               <th>Moteur</th>
               <th>Sièges</th>
+              <th>Prix</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -66,6 +67,7 @@ function AdminCars() {
               <td>{car.door}</td>
               <td>{car.engine}</td>
               <td>{car.seating_capacity}</td>
+              <td>{car.price}€</td>
               <td>
                 <Link to={`/admin/adminCarPut/${car.id}`}>Modifier</Link> |&nbsp;
                 <Link onClick={() => deleteCar(car.id)}>Supprimer</Link>

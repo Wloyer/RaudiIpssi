@@ -18,10 +18,14 @@ const Option = sequelize.define('option', {
         allowNull: false,
     },
     //troisième colonne
-    prix: {
+    price: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
 });
+
+Option.associate = (models) => {
+    Option.hasMany(models.Order, { as: 'Orders', foreignKey: 'optionId' });
+};
 
 module.exports = Option

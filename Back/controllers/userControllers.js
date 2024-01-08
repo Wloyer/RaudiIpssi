@@ -93,7 +93,7 @@ const UserController = {
                     process.env.SECRET_KEY,
                     { expiresIn: '1h' } 
                 );
-                res.status(201).json({ user: { id: newUser.id, firstName, lastName, email, role }, token, role: newUser.role });
+                res.status(201).json({ user: { id: newUser.id, firstName, lastName, email, role }, token, role: newUser.role, id: newUser.id });
             } catch (error) {
                 res.status(400).json({ error: error.message });
             }
@@ -117,7 +117,7 @@ const UserController = {
                 process.env.SECRET_KEY, 
                 { expiresIn: '1h' } 
             );
-            res.status(200).json({ message: "Connexion réussie", token, role: user.role });
+            res.status(200).json({ message: "Connexion réussie", token, role: user.role, id: user.id });
         } catch (error) {
             res.status(500).json({ error: error.message });
         }

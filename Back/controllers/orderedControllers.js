@@ -1,6 +1,7 @@
 const Order = require('../models/orderedModel'); 
 const User = require('../models/userModel');
 const Car = require('../models/carModel');
+const orderedOptions = require('../models/ordoredOptionsModel');
 const sequelize = require('../database/database');
 
 
@@ -8,36 +9,61 @@ const sequelize = require('../database/database');
 const OrderedController = {
 
     // Créer une nouvelle commande
+    
 
-    async createOrder(req, res) {
+    createOrder: async (req, res) => {
+        
+    
+
+    createOrder: async (req, res) => {
+        
         try {
-            const { userId, carId, price, orderDate  } = req.body;
+          const { price, userId, carId, selectedOptionIds } = req.body;
+          console.log(selectedOptionIds);if (!Array.isArray(selectedOptionIds)) {
+          const { price, userId, carId, selectedOptionIds } = req.body;
+          console.log(selectedOptionIds);if (!Array.isArray(selectedOptionIds)) {
 
-            const user = await User.findByPk(userId);
-            if (!user) {
-                return res.status(404).json({ message: 'Utilisateur non trouvé' });
-            }
-
-            const car = await Car.findByPk(carId);
-            if (!car) {
-                return res.status(404).json({ message: 'Voiture non trouvée' });
-            }
-
-            const newOrder = await Order.create({
-                userId,
-                carId,
-                price,
-                orderDate,
-            });
-
-            res.status(201).json(newOrder);
-        } catch (error) {
-            res.status(400).json({ error: error.message });
+            return res.status(400).json({ error: "selectedOptionIds must be an array" });
+        
         }
-    },
+          const newOrder = await Order.create({
+            userId,
+            carId,
+            price,
+          });
+    
+          for (const optionId of selectedOptionIds) {
+            await orderedOptions.create({
+              orderId: newOrder.id,
+              optionId: optionId ,
+            return res.status(400).json({ error: "selectedOptionIds must be an array" });
+        
+        }
+          const newOrder = await Order.create({
+            userId,
+            carId,
+            price,
+          });
+    
+          for (const optionId of selectedOptionIds) {
+            await orderedOptions.create({
+              orderId: newOrder.id,
+              optionId: optionId ,
+            });
+          }
+    
+          res.status(201).json(newOrder);
+          }
+    
+          res.status(201).json(newOrder);
+        } catch (error) {
+          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message });
+        }
+      },
+      },
 
     // Obtenir les informations d'une commande
-
     async getOrder(req, res) {
         try {
             const order = await Order.findByPk(req.params.id, {

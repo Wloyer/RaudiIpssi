@@ -4,77 +4,85 @@ import axios from 'axios';
 import { useParams, useNavigate , Link } from 'react-router-dom';
 
 
-function Admin() {
-  const [car, setCar] = useState({
-    name: '',
-    door: '',
-    engine: '',
-    seating_capacity: '',
-  });
-  const { id } = useParams();
-  const navigate = useNavigate();
+function AdminOptions() {
+  const [options, setOptions] = useState([]);
 
-  useEffect(() => {
-    const checkAuthorization = async () => {
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/car/updateCar/${id}`, {
-          headers: {
-            'Authorization': localStorage.getItem('token')
-          }
-        });
-
-        if (response.status !== 200) {
-          navigate('/');
-        } else {
-          const fetchResponse = await axios.get(`http://127.0.0.1:8000/car/getCar/${id}`);
-          setCar(fetchResponse.data.car);
-        }
-      } catch (error) {
-        console.error('Erreur d\'autorisation:', error);
-        navigate('/');
-      }
-    };
-
-    checkAuthorization();
-  }, [id, navigate]);
-
-  const handleChange = (e) => {
-    setCar({ ...car, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const fetchData = async () => {
     try {
-      await axios.put(`http://127.0.0.1:8000/car/updateCar/${id}`, car, {
-        headers: {
-          'Authorization': localStorage.getItem('token')
-        }
-      });
-      console.log('Voiture mise à jour avec succès!');
-      navigate('/admin/cars');
+      const response = await axios.get('http://127.0.0.1:8000/option/getAllOption');
+      setOptions(response.data.option);
     } catch (error) {
-      console.error('Une erreur s\'est produite lors de la mise à jour de la voiture:', error);
+      console.error('Une erreur s\'est produite lors de la récupération des données:', error);
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const deleteOption = async (idOption) => {
+    try {
+      await axios.delete(`http://127.0.0.1:8000/option/deleteOption/${idOption}`);
+      fetchData();
+    } catch (error) {
+      console.error('Une erreur s\'est produite lors de la suppression des données:', error);
+    }
+  };
+
   return (
     <div className="admin-container">
-      <h2 className="h2Admin">Admin</h2>
-      <div className="admin-cards">
-        <Link to="/admin/users" className="admin-card">
-          <h3>Utilisateurs</h3>
-          <p>Gérer les utilisateurs</p>
-        </Link>
-        <Link to="/admin/cars" className="admin-card">
-          <h3>Voitures</h3>
-          <p>Gérer les voitures</p>
-        </Link>
-        <Link to="/admin/options" className="admin-card">
-          <h3>Options</h3>
-          <p>Gérer les options</p>
-        </Link>
-      </div>
+      <h2>Liste des modèles</h2>
+      <Link to="/admin/adminOptionsAdd" className='buttonAdd'>Ajouter une option</Link>
+      <table className="user-table">
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+        <tbody>
+          {options.map(option => (
+            <tr key={option.id}>
+              <td>{option.id}</td>
+              <td>{option.name}</td>
+              <td>{option.price}€</td>
+              <td>
+                <Link to={`/admin/adminOptionPut/${option.id}`}>Modifier</Link> |&nbsp;
+                <Link onClick={() => deleteOption(option.id)}>Supprimer</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h2>Liste des modèles</h2>
+      <Link to="/admin/adminOptionsAdd" className='buttonAdd'>Ajouter une option</Link>
+      <table className="user-table">
+        <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nom</th>
+              <th>Prix</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+        <tbody>
+          {options.map(option => (
+            <tr key={option.id}>
+              <td>{option.id}</td>
+              <td>{option.name}</td>
+              <td>{option.price}€</td>
+              <td>
+                <Link to={`/admin/adminOptionPut/${option.id}`}>Modifier</Link> |&nbsp;
+                <Link onClick={() => deleteOption(option.id)}>Supprimer</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
-export default Admin;
+export default AdminOptions;

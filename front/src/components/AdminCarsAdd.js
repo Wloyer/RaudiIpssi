@@ -9,6 +9,8 @@ function AdminCarsAdd() {
     door: '',
     engine: '',
     seating_capacity: '',
+    price: ''
+    price: ''
   });
 
   const navigate = useNavigate();
@@ -90,6 +92,17 @@ function AdminCarsAdd() {
           id="seating_capacity"
           name="seating_capacity"
           value={carData.seating_capacity}
+          onChange={handleChange}
+          required
+        />
+
+        <label className="labelUpdateUser" htmlFor="price">Prix:</label>
+        <input
+          className="inputUpdateUser"
+          type="number"
+          id="price"
+          name="price"
+          value={carData.price}
           onChange={handleChange}
           required
         />

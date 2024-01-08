@@ -10,6 +10,7 @@ function UpdateCar() {
     door: '',
     engine: '',
     seating_capacity: '',
+    price: ''
   });
   const { id } = useParams();
 
@@ -88,6 +89,17 @@ function UpdateCar() {
           id="seating_capacity"
           name="seating_capacity"
           value={car.seating_capacity}
+          onChange={handleChange}
+          required
+        />
+
+        <label className="labelUpdateUser" htmlFor="price">Prix:</label>
+        <input
+          className="inputUpdateUser"
+          type="number"
+          id="price"
+          name="price"
+          value={car.price}
           onChange={handleChange}
           required
         />

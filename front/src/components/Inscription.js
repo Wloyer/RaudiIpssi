@@ -30,7 +30,7 @@ function Inscription() {
                 Cookies.set('token', data.token);
                 localStorage.setItem('token', data.token);
                 Cookies.set('role', data.role);
-                localStorage.setItem('role', data.role);
+                Cookies.set('id', data.id);
                 window.location.href = '/';
                 console.log('Inscription réussie');
             } else {
