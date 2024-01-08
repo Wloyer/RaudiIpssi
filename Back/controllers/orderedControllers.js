@@ -91,7 +91,48 @@ const OrderedController = {
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
+    },
+
+    // historique des commandes pour rôles comptable et admin 
+    async getOrderedHistory(req,res) {
+        if (req.user.role === 'comptable' || req.user.role === 'admin') {
+            const orders = await Order.findAll({
+                include: [{model:User}],
+            });
+            res.status(200).json({
+                success: true,
+                message: "Voici l'historique des commandes",
+                orders:orders
+            });
+        } else {
+            res.status(400).json({
+                success: false,
+                message: "Vous n'êtes pas autorisé à accéder à l'historique des commandes"
+            });
+        }
     }
+
+
+
 };
+
+/* // historique des commandes
+exports.getOrderedHistory = async (req,res) => {
+    if (req.user.role === 'comptable' || req.user.role === 'admin') {
+        const orders = await Order.findAll({
+            include: [{model:User}],
+        });
+        res.status(200).json({
+            success: true,
+            message: "Voici l'historique des commandes",
+            orders:orders
+        });
+    } else {
+        res.status(400).json({
+            success: false,
+            message: "Vous n'êtes pas autorisé à accéder à l'historique des commandes"
+        });
+    }
+} */
 
 module.exports = OrderedController;
