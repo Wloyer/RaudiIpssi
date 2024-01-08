@@ -25,7 +25,7 @@ function Accueil() {
       <h2 className='h2Accueil'>Liste des modèles</h2>
       <ul className='ulCard'>
         {voitures.map((car) => (
-          <Link to={"/details/" + car.name} className='liCard'>
+          <Link to={"/details/" + car.id} className='liCard'>
             <li key={car.id}>
               <div className="card">
                 <h3 className='h3Card'>Raudi {car.name}</h3>
