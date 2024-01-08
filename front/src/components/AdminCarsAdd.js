@@ -14,16 +14,6 @@ function AdminCarsAdd() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Fonction pour vérifier si l'utilisateur est autorisé à accéder à cette page
-    const role = localStorage.getItem('role');
-
-    if (role !== 'admin') {
-      console.error('Accès non autorisé');
-      navigate('/');
-    }
-  }, [navigate]);
-
   const handleChange = (e) => {
     setCarData({ ...carData, [e.target.name]: e.target.value });
   };
@@ -91,17 +81,6 @@ function AdminCarsAdd() {
           id="seating_capacity"
           name="seating_capacity"
           value={carData.seating_capacity}
-          onChange={handleChange}
-          required
-        />
-
-        <label className="labelUpdateUser" htmlFor="price">Prix:</label>
-        <input
-          className="inputUpdateUser"
-          type="number"
-          id="price"
-          name="price"
-          value={carData.price}
           onChange={handleChange}
           required
         />

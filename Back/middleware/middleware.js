@@ -18,17 +18,14 @@ exports.isAuthenticated = (req, res, next) => {
         res.status(401).json({ message: "Token invalide" });
     }
 };
-// Middleware pour vérifier le rôle de l'utilisateur
-exports.hasRole = (roles) => {
-    return (req, res, next) => {
-        const userRole = req.user.role;
 
-        if (roles.includes(userRole)) {
-            next();
-        } else {
-            res.status(403).json({ message: "Accès non autorisé pour ce rôle" });
-        }
-    };
+
+exports.isAdmin = (req, res, next) => {
+    const user = req.user;
+  
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ message: "Accès non autorisé pour ce rôle" });
+    }
+  
+    next();
 };
-
-

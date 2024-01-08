@@ -1,73 +1,42 @@
 const Order = require('../models/orderedModel'); 
 const User = require('../models/userModel');
 const Car = require('../models/carModel');
-const orderedOptions = require('../models/ordoredOptionsModel');
+const orderedOptions = require('../models/orderedOptionsModel');
 const sequelize = require('../database/database');
 
-
-
 const OrderedController = {
-
-    // Créer une nouvelle commande
-    
-
     createOrder: async (req, res) => {
-        
-    
-
-    createOrder: async (req, res) => {
-        
         try {
-          const { price, userId, carId, selectedOptionIds } = req.body;
-          console.log(selectedOptionIds);if (!Array.isArray(selectedOptionIds)) {
-          const { price, userId, carId, selectedOptionIds } = req.body;
-          console.log(selectedOptionIds);if (!Array.isArray(selectedOptionIds)) {
+            const { price, userId, carId, selectedOptionIds } = req.body;
 
-            return res.status(400).json({ error: "selectedOptionIds must be an array" });
-        
-        }
-          const newOrder = await Order.create({
-            userId,
-            carId,
-            price,
-          });
-    
-          for (const optionId of selectedOptionIds) {
-            await orderedOptions.create({
-              orderId: newOrder.id,
-              optionId: optionId ,
-            return res.status(400).json({ error: "selectedOptionIds must be an array" });
-        
-        }
-          const newOrder = await Order.create({
-            userId,
-            carId,
-            price,
-          });
-    
-          for (const optionId of selectedOptionIds) {
-            await orderedOptions.create({
-              orderId: newOrder.id,
-              optionId: optionId ,
+            if (!Array.isArray(selectedOptionIds)) {
+                return res.status(400).json({ error: "selectedOptionIds must be an array" });
+            }
+
+            const newOrder = await Order.create({
+                userId,
+                carId,
+                price,
             });
-          }
-    
-          res.status(201).json(newOrder);
-          }
-    
-          res.status(201).json(newOrder);
+
+            for (const optionId of selectedOptionIds) {
+                await orderedOptions.create({
+                    orderId: newOrder.id,
+                    optionId: optionId,
+                });
+            }
+
+            res.status(201).json(newOrder);
         } catch (error) {
-          res.status(400).json({ error: error.message });
-          res.status(400).json({ error: error.message });
+            res.status(400).json({ error: error.message });
         }
-      },
-      },
+    },
 
     // Obtenir les informations d'une commande
-    async getOrder(req, res) {
+    getOrder: async (req, res) => {
         try {
             const order = await Order.findByPk(req.params.id, {
-                include: [User, Car] 
+                include: [User, Car, orderedOptions],
             });
 
             if (!order) {
@@ -79,7 +48,6 @@ const OrderedController = {
             res.status(400).json({ error: error.message });
         }
     },
-
     
     // Mettre à jour une commande
     async updateOrder(req, res) {
@@ -162,10 +130,7 @@ const OrderedController = {
             });
         }
     }
-
-
-
-};
+}
 
 /* // historique des commandes
 exports.getOrderedHistory = async (req,res) => {
